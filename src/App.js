@@ -1,18 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Projects from './Components/Projects'
+import AddProject from './Components/AddProject'
 
 class App extends Component {
+  // Declaring states called projects in our main app component
+  constructor(){
+    super();
+    this.state = {
+      projects: []
+    }
+  }
+
+  // Lifecycle method, it fires off everytime the component is rerendered
+  componentWillMount(){
+    this.setState({projects: [
+      {
+        title: 'Business Website',
+        category: 'Web Design'
+      },
+      {
+        title: 'Social App',
+        category: 'Mobile Development'
+      },
+      {
+        title: 'Ecommerce Shopping Cart',
+        category: 'Web Development'
+      }
+    ]});
+  }
+
+  handleAddProject(projects){
+    console.log(projects);
+  }
+
   render() {
-    return (
+    return(
+      // Only one div at the very top level
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <AddProject addProject={this.handleAddProject.bind(this)}/>
+        <Projects projects={this.state.projects} />
       </div>
     );
   }
